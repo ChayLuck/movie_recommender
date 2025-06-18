@@ -1,5 +1,3 @@
-# movie_recommender.py
-
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -9,11 +7,8 @@ K = 5   # minimum ortak film sayısı
 N = 10  # en benzer kullanıcı sayısı
 m = 5   # önerilecek film sayısı
 
-# 1️⃣ Verileri yükle
 movies = pd.read_csv('movies.csv')
 ratings = pd.read_csv('ratings.csv')
-
-# 2️⃣ Yardımcı fonksiyonlar
 
 # Ortalama puanı hesapla
 def mean_rating(user_ratings):
@@ -63,7 +58,7 @@ def predict_rating(u_id, p_id, user_mean, similar_users):
     
     return user_mean + numerator / denominator
 
-# 3️⃣ Öneri algoritması
+# Öneri algoritması
 def recommend_movies_for_user(u_id):
     u_ratings = ratings[ratings['userId'] == u_id]
     user_mean = mean_rating(u_ratings)
@@ -124,7 +119,7 @@ def recommend_movies_for_user(u_id):
         movie_title = movies[movies['movieId'] == p_id]['title'].values[0]
         print(f"{movie_title} (predicted rating: {score:.2f})")
 
-# 4️⃣ Kullanım
+# Kullanım
 
 if __name__ == "__main__":
     target_user_id = int(input("Enter target user ID: "))
